@@ -1,34 +1,27 @@
 /* eslint-disable react/prop-types */
 import "../styles/Froms.css";
 
-function Personal({
-  fullName,
-  phoneNumber,
-  email,
-  onNameChange,
-  onPhoneNumberChange,
-  onEmailChange,
-}) {
+function Personal({ nombre, telefono, email, onChangePersonal }) {
   return (
     <div className="personal">
       <form>
         <input
           type="text"
           placeholder="Full Name"
-          value={fullName}
-          onChange={onNameChange}
+          value={nombre}
+          onChange={(e) => onChangePersonal("nombre", e.target.value)}
         />
         <input
           type="text"
           placeholder="Number"
-          value={phoneNumber}
-          onChange={onPhoneNumberChange}
+          value={telefono}
+          onChange={(e) => onChangePersonal("telefono", e.target.value)}
         />
         <input
           type="text"
           placeholder="Email"
           value={email}
-          onChange={onEmailChange}
+          onChange={(e) => onChangePersonal("email", e.target.value)}
         />
       </form>
     </div>
