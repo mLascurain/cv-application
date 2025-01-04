@@ -5,48 +5,30 @@ import Trabajo from "./components/Tranajo.jsx";
 import { useState } from "react";
 
 function App() {
-  const [formulariosEducacion, setFormulariosEducacion] = useState([{ id: 0 }]);
-  const [formulariosTrabajo, setFormulariosTrabajo] = useState([{ id: 0 }]);
+  const [formulariosEducacion, setFormulariosEducacion] = useState([
+    {
+      id: 0,
+      institucion: "Universidad Tecnologica Nacional",
+      titulo: "Tecnico Universitario en Programacion",
+      fecha: "2024",
+    },
+  ]);
+  const [formulariosTrabajo, setFormulariosTrabajo] = useState([
+    {
+      id: 0,
+      empresa: "Google",
+      puesto: "Desarrollador Frontend",
+      fecha: "2025",
+    },
+  ]);
   const [fullName, setFullName] = useState("Matias Lascurain");
   const [phoneNumber, setPhoneNumber] = useState("4923-1294");
   const [email, setEmail] = useState("queteimporta@gmail.com");
-  const [institucionEdu, setInstitucionEdu] = useState(
-    "Universidad Tecnologica Nacional"
-  );
-  const [institucionTrabajo, setInstitucionTrabajo] = useState("Google");
-  const [cargoTrabajo, setCargoTrabajo] = useState("Desarrollador Frontend");
-  const [titulo, setTitulo] = useState("Tecnico Universitario en Programacion");
-  const [fechaEdu, setFechaEdu] = useState("2023");
-  const [fechaTrabajo, setFechaTrabajo] = useState("2025");
-
-  const handleInstitucionEduChange = (event) => {
-    setInstitucionEdu(event.target.value);
-  };
-
-  const handleInstitucionTrabajoChange = (event) => {
-    setInstitucionTrabajo(event.target.value);
-  };
-
-  const handleCargoTrabajoChange = (event) => {
-    setCargoTrabajo(event.target.value);
-  };
-
-  const handleFechaTrabajoChange = (event) => {
-    setFechaTrabajo(event.target.value);
-  };
-
-  const handleFechaEduChange = (event) => {
-    setFechaEdu(event.target.value);
-  };
-
-  const handleTituloChange = (event) => {
-    setTitulo(event.target.value);
-  };
 
   const agregarEducacion = () => {
     setFormulariosEducacion((prevFormularios) => [
       ...prevFormularios,
-      { id: prevFormularios.length },
+      { id: prevFormularios.length, institucion: "", titulo: "", fecha: "" },
     ]);
   };
 
@@ -56,16 +38,32 @@ function App() {
     );
   };
 
+  const actualizarEducacion = (id, campo, valor) => {
+    setFormulariosEducacion((prevFormularios) =>
+      prevFormularios.map((formulario) =>
+        formulario.id === id ? { ...formulario, [campo]: valor } : formulario
+      )
+    );
+  };
+
   const agregarTrabajo = () => {
     setFormulariosTrabajo((prevTrabajo) => [
       ...prevTrabajo,
-      { id: prevTrabajo.length },
+      { id: prevTrabajo.length, empresa: "", puesto: "", fecha: "" },
     ]);
   };
 
   const borrarTrabajo = (id) => {
     setFormulariosTrabajo((prevTrabajo) =>
       prevTrabajo.filter((trabajo) => trabajo.id !== id)
+    );
+  };
+
+  const actualizarTrabajo = (id, campo, valor) => {
+    setFormulariosTrabajo((prevTrabajo) =>
+      prevTrabajo.map((trabajo) =>
+        trabajo.id === id ? { ...trabajo, [campo]: valor } : trabajo
+      )
     );
   };
 
@@ -101,13 +99,13 @@ function App() {
             <div className="container" key={formulario.id}>
               <Educacion
                 id={formulario.id}
-                institucionEdu={institucionEdu}
-                onInstitucionEduChange={handleInstitucionEduChange}
-                titulo={titulo}
-                onTituloChange={handleTituloChange}
-                fechaEdu={fechaEdu}
-                onFechaEduChange={handleFechaEduChange}
+                institucion={formulario.institucion}
+                titulo={formulario.titulo}
+                fecha={formulario.fecha}
                 onBorrar={() => borrarEducacion(formulario.id)}
+                onChangeEdu={(campo, valor) =>
+                  actualizarEducacion(formulario.id, campo, valor)
+                }
               />
             </div>
           ))}
@@ -121,13 +119,13 @@ function App() {
             <div className="container" key={trabajo.id}>
               <Trabajo
                 id={trabajo.id}
+                empresa={trabajo.empresa}
+                puesto={trabajo.puesto}
+                fecha={trabajo.fecha}
                 onBorrar={() => borrarTrabajo(trabajo.id)}
-                institucionTrabajo={institucionTrabajo}
-                onInstitucionTrabajoChange={handleInstitucionTrabajoChange}
-                cargoTrabajo={cargoTrabajo}
-                onCargoTrabajoChange={handleCargoTrabajoChange}
-                fechaTrabajo={fechaTrabajo}
-                onFechaTrabajoChange={handleFechaTrabajoChange}
+                onChange={(campo, valor) =>
+                  actualizarTrabajo(trabajo.id, campo, valor)
+                }
               />
             </div>
           ))}
@@ -173,9 +171,9 @@ function App() {
             {formulariosEducacion.map((formulario) => (
               <div className="educacion" key={formulario.id}>
                 <div className="line"></div>
-                <p>{institucionEdu}</p>
+                <p>{formulario.institucion}</p>
                 <p>
-                  {titulo} - {fechaEdu}
+                  {formulario.titulo} - {formulario.fecha}
                 </p>
               </div>
             ))}
@@ -185,9 +183,9 @@ function App() {
             {formulariosTrabajo.map((trabajo) => (
               <div className="trabajo" key={trabajo.id}>
                 <div className="line"></div>
-                <p>{institucionTrabajo}</p>
+                <p>{trabajo.empresa}</p>
                 <p>
-                  {cargoTrabajo} - {fechaTrabajo}
+                  {trabajo.puesto} - {trabajo.fecha}
                 </p>
               </div>
             ))}

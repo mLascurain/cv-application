@@ -1,17 +1,9 @@
 /* eslint-disable react/prop-types */
 import "../styles/Froms.css";
-function Educacion({
-  id,
-  onBorrar,
-  onTituloChange,
-  onInstitucionEduChange,
-  onFechaEduChange,
-  titulo,
-  institucionEdu,
-  fechaEdu,
-}) {
+
+function Educacion({ id, institucion, titulo, fecha, onBorrar, onChangeEdu }) {
   return (
-    <div>
+    <div className="educacion">
       <h2>Educación {`#${id + 1}`}</h2>
       <form>
         <button className="delete" onClick={onBorrar}>
@@ -30,21 +22,26 @@ function Educacion({
         </button>
         <input
           type="text"
-          placeholder="Institucion"
-          value={institucionEdu}
-          onChange={onInstitucionEduChange}
+          placeholder="Institución"
+          value={institucion}
+          onChange={(e) => {
+            onChangeEdu("institucion", e.target.value);
+          }}
         />
         <input
           type="text"
-          placeholder="Titulo"
+          placeholder="Título"
           value={titulo}
-          onChange={onTituloChange}
+          onChange={(e) => {
+            onChangeEdu("titulo", e.target.value);
+          }}
         />
         <input
           type="text"
-          placeholder="Fecha de finalización"
-          value={fechaEdu}
-          onChange={onFechaEduChange}
+          value={fecha}
+          onChange={(e) => {
+            onChangeEdu("fecha", e.target.value);
+          }}
         />
       </form>
     </div>

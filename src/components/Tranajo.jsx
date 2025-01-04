@@ -1,17 +1,9 @@
 /* eslint-disable react/prop-types */
 import "../styles/Froms.css";
-function Trabajo({
-  id,
-  onBorrar,
-  onCargoTrabajoChange,
-  onInstitucionTrabajoChange,
-  onFechaTrabajoChange,
-  cargoTrabajo,
-  institucionTrabajo,
-  fechaTrabajo,
-}) {
+
+function Trabajo({ id, empresa, puesto, fecha, onBorrar, onChange }) {
   return (
-    <div>
+    <div className="trabajo">
       <h2>Trabajo {`#${id + 1}`}</h2>
       <form>
         <button className="delete" onClick={onBorrar}>
@@ -30,21 +22,21 @@ function Trabajo({
         </button>
         <input
           type="text"
-          placeholder="Institucion"
-          value={institucionTrabajo}
-          onChange={onInstitucionTrabajoChange}
+          placeholder="Empresa"
+          value={empresa}
+          onChange={(e) => onChange("empresa", e.target.value)}
         />
         <input
           type="text"
-          placeholder="Cargo"
-          value={cargoTrabajo}
-          onChange={onCargoTrabajoChange}
+          placeholder="Puesto"
+          value={puesto}
+          onChange={(e) => onChange("puesto", e.target.value)}
         />
         <input
           type="text"
-          placeholder="Fecha de finalización"
-          value={fechaTrabajo}
-          onChange={onFechaTrabajoChange}
+          placeholder="Fecha"
+          value={fecha}
+          onChange={(e) => onChange("fecha", e.target.value)}
         />
       </form>
     </div>
