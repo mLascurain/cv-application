@@ -1,0 +1,75 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.personal {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.personal-info {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+
+.personal-info h2 {
+  font-size: 30px;
+  font-weight: 1000;
+  margin: 0px;
+}
+
+.personal-info p {
+  font-size: 20px;
+  font-weight: 1000;
+  margin: 0px;
+}
+
+.App {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+}
+
+.cv-forms {
+  grid-column: 1;
+}
+
+.cv-container {
+  grid-column: 2;
+}
+
+.content {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  text-align: left;
+}
+
+.trabajo-info h2 {
+  text-decoration: underline;
+}
+
+.educacion-info h2 {
+  text-decoration: underline;
+}
+
+.seccion-edu {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+}
+
+.line {
+  border-bottom: 2px solid #6b6b6b;
+  width: 600px;
+}
